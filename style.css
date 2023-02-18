@@ -1,0 +1,318 @@
+* {
+  margin: 0;
+  padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+  
+}
+
+header {
+  background-color:rgb(248, 248, 248);
+  display:flex;
+  flex-direction: row;
+  align-items: center;  
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 2rem;
+  color:black;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+.navigation_bar {
+  background-color: #C58940;
+  height: 90px;
+  width: 100%;
+
+
+}
+
+
+.navigation_bar li{
+  list-style: none; 
+  float: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;  
+  vertical-align: middle;
+  padding:20px ;  
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 10px;  
+  transition: all 0.3s ease;
+
+
+}
+
+/* hoover */
+.nav a:hover {
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.banner_section {
+  background-image: url(./assets/images/polina-rytova-1dGMs4hhcVA-unsplash.jpg);
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+text-transform: none;
+  letter-spacing: 2px;
+  padding: 0 20px; 
+}
+
+
+.banner_section h1
+ {
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 50px;
+}
+
+.banner_section p
+ {
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 50px;
+}
+
+.serch_button  form{
+  float: right;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-right: 2px;  */
+  /* shadow */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+
+
+
+}
+
+.serch_button input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid gray;
+  outline: none;
+  flex-grow: 1;
+}
+
+.serch_button button[type="submit"] {
+  padding: 10px 20px;
+  background-color: lightgray;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.serch_button button[type="submit"]:hover {
+  background-color: gray;
+  color: white;
+}
+
+.footer {
+
+background-color: #1a120b;
+  height: 140px;  
+  width: 100%;
+  margin: 0%;
+ display: flex;
+  flex-direction: row;
+
+
+  padding:20px ;  
+
+}
+
+.footer p {
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  font-size: 16px;
+  float: left;
+
+}
+
+
+.imagelisting{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap; 
+  justify-content: center;
+ background-color:rgb(234, 220, 220);
+
+
+}
+.image img{
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+  margin-right: 0px;
+  border: 1px solid white;
+  border-radius: 10px;    
+  transition: all 0.3s ease;
+ 
+}
+.imagelisting img:hover {
+  border: 1px solid black;  
+
+  transition: all 0.3s ease;
+  /* zoom */
+  transform: scale(1.09);  
+
+
+}
+.upperfooter {
+  height: 200px;
+  width: 100%;
+  background-color:#3C2A21;
+  display: flex;
+  flex-direction: row;
+
+}
+.upperfooter ul {
+  display: flex;
+  flex-direction: column;
+
+}
+.upperfooter a {
+  color: white;
+  float: left;
+  text-decoration: none;
+
+}
+.main{
+  flex:1; 
+}
+.main a {
+ margin-left: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+padding: 10PX;
+  
+  
+
+
+
+  
+}
+.sidebar {
+  width: 400px;
+  height: 100%;   
+  background: color #3C2A21; 
+ float: right;   
+
+
+}
+.sidebar form {
+  width: 400px; /* set width of the form */
+  margin: 0 auto; /* center the form */
+  padding: 30px; /* add padding to the form */    
+}
+
+.sidebar label {
+  font-size: 18px;
+  color:white;
+  display: block; /* display label as a block element */
+  margin-bottom: 10px; /* add margin to the bottom of the label */
+}
+
+.sidebar input {
+  width: 100%; /* make the input field take up the full width of the form */
+  padding: 12px; /* add padding to the input field */
+  border: none; /* remove the border of the input field */
+  border-radius: 4px; /* add rounded corners to the input field */
+  margin-bottom: 20px; /* add margin to the bottom of the input field */
+}
+
+.sidebar button {
+  background-color: #4CAF50; /* set background color of the button */
+  color: white; /* set text color of the button */
+  padding: 12px 20px; /* add padding to the button */
+  border: none; /* remove the border of the button */
+  border-radius: 4px; /* add rounded corners to the button */
+  cursor: pointer; /* change cursor to pointer when hovering over the button */
+  font-size: 18px; /* set font size of the button text */
+}
+
+.more_about p{
+  color: black !important;
+}
+#scroll-top-btn{
+ 
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: lightgray;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+  
+  
+}
+.social_media{
+font-size: 30px;
+ 
+}
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+.fixed_img{
+ background-image: url(./assets/images/grain_3.jpg);
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+ background-repeat: repeat-y;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: roe;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0 20px; 
+ 
+
+}
