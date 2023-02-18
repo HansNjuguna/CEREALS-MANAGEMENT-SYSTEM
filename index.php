@@ -1,3 +1,17 @@
+<?php
+// start sission if not started
+if (!isset($_SESSION)) {
+    session_start();
+}
+// if session is not set this will redirect to login page
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login.php");
+    exit;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,10 +55,12 @@
 
         <div>
             <button class="toggle-button"></button>
-
+            <span><?php
+                    echo "Hello " . $_SESSION['username'];
+                    ?></span>
             <div class="toggle-content">
                 <a href="#" id="logout">Logout</a>
-                <a href="#" id="profile">Profile</a>
+                <a href="profile.php" id="profile">Profile</a>
             </div>
         </div>
 
