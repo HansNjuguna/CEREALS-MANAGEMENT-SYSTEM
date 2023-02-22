@@ -4,11 +4,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 // if session is not set this will redirect to login page
-if (!isset($_SESSION['username'])) {
+/* if (!isset($_SESSION['username'])) {
     header("Location: ../login.php");
     exit;
 }
-
+ */
 ?>
 
 
@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals strtolower</title>
+    <title>Online cereals </title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
-        <h1>Cereals Delivery system</h1>
+        <h1>Cereals Order system</h1>
         <br>
         <!-- social media -->
         <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>
@@ -55,9 +55,9 @@ if (!isset($_SESSION['username'])) {
 
         <div>
             <button class="toggle-button"></button>
-            <span><?php
-                    echo "Hello " . $_SESSION['username'];
-                    ?></span>
+            <!--  <span><?php
+                        echo "Hello " . $_SESSION['username'];
+                        ?></span> -->
             <div class="toggle-content">
                 <a href="#" id="logout">Logout</a>
                 <a href="profile.php" id="profile">Profile</a>
@@ -76,10 +76,17 @@ if (!isset($_SESSION['username'])) {
             <ul class="nav">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Login/Register</a></li>
+                <!-- <li><a href="login.php">Login/Register</a></li> -->
                 <li><a href="admin_login.php">Admin</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
+                <li><a href="products.php">Products</a></li>
                 <li><a href="services.php">Services</a></li>
+                <?php
+                if (isset($_SESSION['username'])) { ?>
+                    <li><a href="logout.php"> Logout</a></li>
+                <?php } else { ?>
+                    <li><a href="login.php"> Login</a></li>
+                <?php }
+                ?>
 
             </ul>
 
@@ -106,9 +113,8 @@ if (!isset($_SESSION['username'])) {
     </section>
 
     <br>
-    <section>
+    <!-- <section>
         <div class="imagelisting">
-            <!-- on clicking the image it should take you to the product page   -->
 
             <div class="image"> <img src="./assets/images/grain_0.jpg" alt="Image 2">
                 <p>grapheme_extract</p>
@@ -135,7 +141,7 @@ if (!isset($_SESSION['username'])) {
                 <p>Ksh9.99/Kg</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section>
 

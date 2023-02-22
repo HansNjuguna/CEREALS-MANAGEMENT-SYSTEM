@@ -83,7 +83,7 @@ if (isset($_POST['sign_up'])) {
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 // redirect to home page
-                header("Location: home.php");
+                header("Location: index.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -112,14 +112,14 @@ if (isset($_POST['login'])) {
         // redirect to login page with errors and submitted data
         $errors = json_encode($errors);
         header("Location: login.php?errors=$errors");
-        exit();
+        // exit();
     } else {
         $sql = "SELECT * FROM user WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
         if (!$result) {
             // handle the error (e.g. log it, display an error message)
             echo "Error executing query: " . mysqli_error($conn);
-            exit();
+            // exit();
         }
         $num_rows = mysqli_num_rows($result);
         if ($num_rows == 1) {
@@ -131,8 +131,8 @@ if (isset($_POST['login'])) {
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 // redirect to home page
-                header("Location: home.php");
-                exit();
+                header("Location: index.php");
+                // exit();
             }
         } else {
             $errors['username'] = "Username or password is incorrect";
@@ -223,7 +223,7 @@ if (isset($_POST['admin-login'])) {
         $errors['username'] = "Username is required";
     }
     if (empty($password)) {
-        $errors['password'] = "Password is required";
+        $errors['password'] = "admin Password is required";
     }
 
     // if there are errors redirect to login page
@@ -246,12 +246,13 @@ if (isset($_POST['admin-login'])) {
             $row = mysqli_fetch_assoc($result);
             $hashed_password = $row['password'];
             if (password_verify($password, $hashed_password)) {
+                echo "hello world";
                 session_start();
                 $_SESSION['admin_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 // redirect to home page
                 header("Location: admin/dashboard.php");
-                exit();
+                // exit();
             }
         } else {
             $errors['username'] = "Username or password is incorrect";

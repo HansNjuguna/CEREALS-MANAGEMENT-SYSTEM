@@ -25,7 +25,7 @@ echo $userid; */
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <style>
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -157,7 +157,7 @@ echo $userid; */
         .success {
             color: green;
         }
-    </style> -->
+    </style>
 </head>
 
 <body>

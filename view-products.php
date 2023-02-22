@@ -1,3 +1,16 @@
+<?php
+// start sission if not started
+if (!isset($_SESSION)) {
+    session_start();
+}
+// if session is not set this will redirect to login page
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +21,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals strtolower</title>
+    <title>Cereals Order system</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <!-- jquery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.modal.min.css" />
+    <script src="js/sweetalert.min.js"></script>
 
     <script src="script.js"></script>
     <header>
@@ -19,7 +37,7 @@
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
-            <h1>Cereals Delmivery system</h1>
+            <h1>Cereals Order system</h1>
 
             <div class="serch_button">
                 <form>
@@ -80,10 +98,19 @@
             <ul class="nav">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Login/Register</a></li>
+                <!-- <li><a href="login.php">Login/Register</a></li> -->
                 <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="products.php">Products</a></li>
                 <li><a href="services.php">Services</a></li>
+                <?php
+                if (isset($_SESSION['username'])) { ?>
+                    <li><a href="logout.php"> Logout</a></li>
+                <?php } else { ?>
+                    <li><a href="login.php"> Login</a></li>
+                <?php }
+                ?>
+                <!-- cart -->
+                <li><a href="cart.php" id="cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
 
             </ul>
         </nav>
@@ -103,6 +130,13 @@
                 $queryResults = mysqli_num_rows($result);
                 if ($queryResults > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $name = $row['p_name'];
+                        $description = $row['p_description'];
+                        $amount = $row['P_amount'];
+                        $quantity = $row['price'];
+                        $image = $row['image'];
+                        $id = $row['p_id'];
+                        $price = $row['price'];
                         echo '
                             <div class="content">
                             <div class="img">
@@ -111,9 +145,9 @@
                             <div class="par">
                                 <p>' . $row['p_name'] . '</p>
                                 <p>' . $row['p_description'] . '</p>
-                                <p>amount: ' . $row['P_amount'] . ' Ksh</p>
-                                <p>available quantity: ' . $row['price'] . 'kg</p>
-                                <button>Purchase product</button>
+                                <p>available quantity: ' . $row['P_amount'] . ' kg</p>
+                                <p>Price/kg: ' . $row['price'] . 'Ksh</p>
+                                <button class="add-cart">Add to cart</button>
                             </div>
                         </div>
                         ';
@@ -139,6 +173,7 @@
         </div>
         <br>
         <section>
+
             <section>
 
                 <div class="upperfooter">
@@ -165,7 +200,7 @@
                         </form>
 
                     </div>
-            </SEction>
+            </section>
 
             <section>
                 <div class="footer">
@@ -178,6 +213,75 @@
                     <i class="fab fa-instagram"></i>
                 </div>
             </section>
+        </section>
+    </section>
+
+    <script>
+        $(document).ready(function() {
+
+
+            // cart local storage init
+            let cartAll = localStorage.getItem('cart');
+            if (cartAll == null) {
+                localStorage.setItem('cart', JSON.stringify([]));
+            }
+
+            // add-cart button
+            const addCart = document.querySelector('.add-cart');
+            addCart.addEventListener('click', () => {
+                alert('Product added to cart');
+                // add to cart function
+                addToCart();
+            });
+
+
+
+            function addToCart() {
+                let cart = JSON.parse(localStorage.getItem('cart'));
+                let id = <?php echo $id; ?>;
+                let name = '<?php echo $name; ?>';
+                let price = <?php echo $price; ?>;
+                let amount = <?php echo $amount; ?>;
+                let image = '<?php echo $image; ?>';
+                let quantity = 1;
+                let total = price * quantity;
+                let item = {
+                    id: id,
+                    name: name,
+                    price: price,
+                    amount: amount,
+                    image: image,
+                    quantity: quantity,
+                    total: total
+                };
+                // if item already exists in cart then increase quantity
+                let itemExists = cart.find(item => item.id == id);
+                if (itemExists) {
+                    itemExists.quantity += 1;
+                    itemExists.total = itemExists.price * itemExists.quantity;
+                } else {
+                    cart.push(item);
+                }
+                // if quantity is more than available quantity then alert
+                /* if (itemExists.quantity > amount) {
+                    alert('Quantity is more than available quantity');
+                    itemExists.quantity -= 1;
+                    itemExists.total = itemExists.price * itemExists.quantity;
+                } */
+                // cart.push(item);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                cartItems();
+            }
+            // function to display cart items number
+            function cartItems() {
+                let cart = JSON.parse(localStorage.getItem('cart'));
+                let cartItems = cart.length;
+                if (cartItems > 0) {
+                    $('#cart').html(`<i class="fas fa-shopping-cart"></i> Cart (${cartItems})`);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
