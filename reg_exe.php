@@ -212,6 +212,9 @@ if (isset($_POST['save-product'])) {
     }
 }
 
+if (isset($_POST['admin-logins'])) {
+    echo "admin login";
+}
 // admin-login
 if (isset($_POST['admin-login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -231,14 +234,14 @@ if (isset($_POST['admin-login'])) {
         // redirect to login page with errors and submitted data
         $errors = json_encode($errors);
         header("Location: admin_login.php?errors=$errors");
-        exit();
+        // exit();
     } else {
-        $sql = "SELECT * FROM user WHERE username = '$username' AND isadmin = 1";
+        $sql = "SELECT * FROM user WHERE username = '$username' AND isadmin = '1'";
         $result = mysqli_query($conn, $sql);
         if (!$result) {
             // handle the error (e.g. log it, display an error message)
             echo "Error executing query: " . mysqli_error($conn);
-            exit();
+            // exit();
         }
         $num_rows = mysqli_num_rows($result);
         if ($num_rows == 1) {
@@ -255,10 +258,11 @@ if (isset($_POST['admin-login'])) {
                 // exit();
             }
         } else {
+            echo "hello world";
             $errors['username'] = "Username or password is incorrect";
             $errors = json_encode($errors);
             header("Location: admin_login.php?errors=$errors");
-            exit();
+            // exit();
         }
     }
 }
@@ -325,6 +329,110 @@ if (isset($_POST['edit-product'])) {
             $_SESSION['message'] = "Product updated successfully";
             // redirect to home page
             header("Location: admin/product-edit.php");
+            exit();
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+}
+// update_profile
+if (isset($_POST['update_profiles'])) {
+    echo 'retrrererere';
+}
+if (isset($_POST['update_profile'])) {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    // $password1 = mysqli_real_escape_string($conn, $_POST['password']);
+    // $password2 = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+    $password1 = "none";
+    $password2 = "none";
+
+    $image = $_FILES['image']['name'];
+    if (empty($password1) || empty($password2)) {
+        $errors['password'] = "Password is required";
+    } else {
+        // if image is not empty upload image
+        if (!empty($image)) {
+            // save image  to images folder
+            $filename = $_FILES["image"]["name"];
+            $tempname = $_FILES["image"]["tmp_name"];
+            $folder = "assets/images/profiles/" . $filename;
+            if (move_uploaded_file($tempname, $folder)) {
+                // update user in the database
+                $sql = "UPDATE user SET username = '$username', email = '$email', phone = '$phone', image = '$image' WHERE username = '$username'";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    $_SESSION['msg_queue_exists'] = "User created successfully";
+                    // redirect to home page
+                    header("Location: admin/settings.php");
+                    // exit();
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            } else {
+
+                echo "<h3>  Failed to upload image!</h3>";
+            }
+        } else {
+            // update user in the database
+            $sql1 = "UPDATE user SET username = '$username', email = '$email', phone = '$phone' WHERE username = '$username'";
+            $result1 = mysqli_query($conn, $sql1);
+            if ($result1) {
+                $_SESSION['msg'] = "User details updated successfully";
+                // redirect to home page
+                header("Location: admin/settings.php");
+                // exit();
+            } else {
+                echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+            }
+        }
+    }
+}
+
+// contact
+if (isset($_POST['contact'])) {
+    // get post form data
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $subject = mysqli_real_escape_string($conn, $_POST['subject']);
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+    // verify input
+    $errors = [];
+    // store submitted data in $b_data array
+    $b_data = [
+        'name' => $name,
+        'email' => $email,
+        'subject' => $subject,
+        'message' => $message
+    ];
+    if (empty($name)) {
+        $errors['name'] = "Name is required";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email is required";
+    }
+    if (empty($subject)) {
+        $errors['subject'] = "Subject is required";
+    }
+    if (empty($message)) {
+        $errors['message'] = "Message is required";
+    }
+    // if there are errors redirect to sign up page
+    if (count($errors) > 0) {
+        // redirect to sign up page with errors and submitted data
+        $errors = json_encode($errors);
+        $b_data = json_encode($b_data);
+        header("Location: contact.php?errors=$errors&b_data=$b_data");
+        exit();
+    } else {
+        // save contact in the database
+        $sql = "INSERT INTO contact (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $_SESSION['message'] = "Message sent successfully";
+            // redirect to home page
+            header("Location: contact.php");
             exit();
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);

@@ -121,21 +121,31 @@ if (!isset($_SESSION['username'])) {
             ?>
         </div>
         <div class="right">
+            <?php
+            include '../dbh.php';
+            $sql = "SELECT * FROM product";
+            $result = mysqli_query($conn, $sql);
+            $products = mysqli_num_rows($result);
+            $sql1 = "SELECT * FROM user";
+            $result1 = mysqli_query($conn, $sql1);
+            $users = mysqli_num_rows($result1);
+            // echo $users;
+            ?>
             <h1>Dashboard</h1>
             <div class="content">
                 <div class="card">
                     <h2>Products</h2>
-                    <p>10</p>
+                    <p><?php echo $products; ?></p>
                 </div>
                 <!-- bought products -->
                 <div class="card">
                     <h2>Bought Products</h2>
-                    <p>10</p>
+                    <p>0</p>
                 </div>
                 <!-- users -->
                 <div class="card">
                     <h2>Users</h2>
-                    <p>10</p>
+                    <p><?php echo $users; ?></p>
                 </div>
             </div>
         </div>

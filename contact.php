@@ -1,3 +1,11 @@
+<?php
+// start sission if not started
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,15 +30,12 @@
             <h1>Cereals Delmivery system</h1>
 
             <div class="serch_button">
-            <form>
-                <input type="text" placeholder="Search...">
-                <button type="submit">Go</button>
-     
+                <form>
+                    <input type="text" placeholder="Search...">
+                    <button type="submit">Go</button>
 
-        </form>
-        </div>
-
-
+                </form>
+            </div>
 
     </header>
     <style>
@@ -74,7 +79,76 @@
         .container_b input[type="submit"]:hover {
           background-color: #3e8e41;
         } */
-      </style>
+        .container_b {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            /* margin-bottom: 20px; */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-control label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        .danger {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
 </head>
 
 <body>
@@ -82,59 +156,99 @@
     <section class="navigation_bar">
         <nav>
             <ul class="nav">
-            <li><a href="index.php">Home</a></li>              
+                <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="login.php">Login/Register</a></li>
-                <li><a href="admin_login.php">Admin</a></li>              
+                <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="gallery.php">Gallery</a></li>
                 <li><a href="services.php">Services</a></li>
-            
-        </nav>
-        
-    </section>
-  
 
-<section>
-    <div class="container_b">
-        <h1>Contact Us</h1>
-        <form action="#" method="post">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="text" name="email" placeholder="Your Email" required>
-          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-          <input type="submit" value="Submit">
-        </form>
-      </div>
-</section>
-<section>
-        
+        </nav>
+
+    </section>
+
+    <section>
+        <div class="container_b">
+            <h1>Contact Us</h1>
+            <form action="reg_exe.php" method="post">
+                <?php
+                if (isset($_GET['errors'])) {
+                    $errors = json_decode($_GET['errors'], true);
+                    foreach ($errors as $key => $value) {
+                        echo "<div class='danger'>$value</div>";
+                    }
+
+                    $b_data = json_decode($_GET['b_data'], true);
+                }
+                if (isset($_SESSION['message'])) {
+                    $msg = $_SESSION['message'];
+                    echo "<div class='success'>$msg</div>";
+                    unset($_SESSION['message']);
+                }
+                ?>
+                <div class="form-control">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your name" value="<?php
+                                                                                                    if (isset($b_data['name'])) {
+                                                                                                        echo $b_data['name'];
+                                                                                                    }
+                                                                                                    ?>">
+                </div>
+                <!-- email -->
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" value="
+                    <?php
+                    if (isset($b_data['email'])) {
+                        echo $b_data['email'];
+                    }
+                    ?>">
+                </div>
+                <!-- subject -->
+                <div class="form-control">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" placeholder="Enter your subject" value="<?php
+                                                                                                            if (isset($b_data['subject'])) {
+                                                                                                                echo $b_data['subject'];
+                                                                                                            }
+                                                                                                            ?>">
+                </div>
+                <!-- message -->
+                <div class="form-control">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" name="contact">Send message</button>
+            </form>
+        </div>
+    </section>
+    <section>
 
         <div class="upperfooter">
-          <div class="main">
-            <ul>
-              <li><a href="about_us.php">> ABOUT US</a></li>
-              <li><a href="FAQS.php">> FAQS</a></li>
-              <li><a href="pivacy_policy.php">> Privacy policy</a></li>
-              <li><a href="terms_of-use.php">> Terms of use</a></li>
-              <li><a href="admin_login.php">> Admin Login</a></li>
-            </ul>
-          </div>
-          <div class="sidebar">
-            <form>
-              <label for="email">SUBSCRIBE NEWSLETTER</label>
-              <input type="email" id="email" name="email" placeholder="example@email.com">
-              <br>
-              <button type="submit">Subscribe</button>
-              <p>
-                if you dont have an account 
-                <br><a href="user_sign _up.php">Sign up!</a> 
-                here now
-              </p>
-            </form>
-    
-     
-          </div>
-         </SEction>
-    
+            <div class="main">
+                <ul>
+                    <li><a href="about_us.php">> ABOUT US</a></li>
+                    <li><a href="FAQS.php">> FAQS</a></li>
+                    <li><a href="pivacy_policy.php">> Privacy policy</a></li>
+                    <li><a href="terms_of-use.php">> Terms of use</a></li>
+                    <li><a href="admin_login.php">> Admin Login</a></li>
+                </ul>
+            </div>
+            <div class="sidebar">
+                <form>
+                    <label for="email">SUBSCRIBE NEWSLETTER</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com">
+                    <br>
+                    <button type="submit">Subscribe</button>
+                    <p>
+                        if you dont have an account
+                        <br><a href="user_sign _up.php">Sign up!</a>
+                        here now
+                    </p>
+                </form>
+
+            </div>
+    </SEction>
 
     <section>
         <div class="footer">

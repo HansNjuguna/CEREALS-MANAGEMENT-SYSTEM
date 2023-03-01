@@ -86,7 +86,7 @@
             <div class="form-input">
                 <input type="password" name="password" placeholder="Enter your password">
             </div>
-            <input type="submit" name="admin-login" value="Submit">
+            <input type="submit" name="admin-login">
         </form>
     </div>
     <script>

@@ -27,6 +27,16 @@ $sql1 = "CREATE TABLE IF NOT EXISTS product (
     image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
+// create contact table
+$sql2 = "CREATE TABLE IF NOT EXISTS contact (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    status TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
 /* $sql1 = "CREATE TABLE IF NOT EXISTS student1 (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(25) NOT NULL
@@ -49,8 +59,9 @@ $statements[] =  $sql2;
 $statements[] =  $sql3;
 $statements[] =  $sql4; */
 // print_r($statements);
-$statements[] = $sql;
-$statements[] = $sql1;
+// $statements[] = $sql;
+// $statements[] = $sql1;
+// $statements[] = $sql2;
 foreach ($statements as $s) {
     // echo $s;
     $sql = $s;

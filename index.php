@@ -65,7 +65,7 @@ if (!isset($_SESSION)) {
         </div>
 
     </header>
-    <SCript src="/assets/jquery-3.6.3.min.js"></SCript>
+    <script src="/assets/jquery-3.6.3.min.js"></script>
 
 </head>
 
