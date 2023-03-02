@@ -82,7 +82,7 @@ if (!isset($_SESSION)) {
             if ($queryResults > 0) {
                 while ($row =  mysqli_fetch_assoc($result)) {
                     echo "<div class='image'>
-                        <img src='assets/images/" . $row['image'] . "' alt='" . $row['p_name'] . "'>
+                        <img src='assets/images/products/" . $row['image'] . "' alt='" . $row['p_name'] . "'>
                         <p>" . $row['p_name'] . "</p>
                         <a href='view-products.php?id=" . $row['p_id'] . "'>View product</a>
                     </div>
