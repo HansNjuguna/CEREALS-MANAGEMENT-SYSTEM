@@ -122,6 +122,10 @@ if (!isset($_SESSION['username'])) {
             width: 100px;
             height: 100px;
         }
+
+        #checkout {
+            display: none;
+        }
     </style>
 
 </head>
@@ -179,6 +183,10 @@ if (!isset($_SESSION['username'])) {
                             <td></td>
                     </tfoot>
                 </table>
+                <br>
+                <div class="checkout">
+                    <button type="button" id="checkout">Checkout</button>
+                </div>
             </div>
         </div>
 
@@ -290,9 +298,29 @@ if (!isset($_SESSION['username'])) {
                     }
                     localStorage.setItem("cart", JSON.stringify(cart));
                     showCart();
+                    check_btn();
                 });
             }
             showCart();
+            check_btn();
+
+            function check_btn() {
+                if (!localStorage.getItem("cart") || JSON.parse(localStorage.getItem("cart")).length === 0) {
+                    $("#checkout").css("display", "none");
+                    // console.log("null");
+                    // console log cart items
+                    console.log(JSON.parse(localStorage.getItem("cart")));
+                } else {
+                    $("#checkout").css("display", "block");
+                    // console.log("not null");
+                }
+            }
+            // onclick of checkout button redirect to checkout page and pass cart items to checkout page
+            $("#checkout").click(function() {
+                var cart = JSON.parse(localStorage.getItem("cart"));
+                var cart_items = JSON.stringify(cart);
+                window.location.href = "checkout.php?cart_items=" + cart_items;
+            });
 
             // remove item from cart
             $(".removegh").click(function() {
@@ -307,6 +335,7 @@ if (!isset($_SESSION['username'])) {
                 }
                 localStorage.setItem("cart", JSON.stringify(cart));
                 showCart();
+                check_btn();
             });
         });
     </script>

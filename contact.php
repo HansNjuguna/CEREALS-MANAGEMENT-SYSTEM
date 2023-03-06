@@ -204,6 +204,14 @@ if (!isset($_SESSION)) {
                     }
                     ?>">
                 </div>
+                <!-- usertype -->
+                <div class="form-control">
+                    <label for="usertype">User Type</label>
+                    <select name="user_type" id="usertype">
+                        <option value="customer">Customer</option>
+                        <option value="supplier">Supplier</option>
+                    </select>
+                </div>
                 <!-- subject -->
                 <div class="form-control">
                     <label for="subject">Subject</label>

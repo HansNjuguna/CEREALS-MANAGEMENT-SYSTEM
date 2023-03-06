@@ -395,6 +395,7 @@ if (isset($_POST['contact'])) {
     // get post form data
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $user_type = mysqli_real_escape_string($conn, $_POST['user_type']);
     $subject = mysqli_real_escape_string($conn, $_POST['subject']);
     $message = mysqli_real_escape_string($conn, $_POST['message']);
     // verify input
@@ -403,6 +404,7 @@ if (isset($_POST['contact'])) {
     $b_data = [
         'name' => $name,
         'email' => $email,
+        'user_type' => $user_type,
         'subject' => $subject,
         'message' => $message
     ];
@@ -411,6 +413,9 @@ if (isset($_POST['contact'])) {
     }
     if (empty($email)) {
         $errors['email'] = "Email is required";
+    }
+    if (empty($user_type)) {
+        $errors['user_type'] = "User type is required";
     }
     if (empty($subject)) {
         $errors['subject'] = "Subject is required";
@@ -427,7 +432,7 @@ if (isset($_POST['contact'])) {
         exit();
     } else {
         // save contact in the database
-        $sql = "INSERT INTO contact (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
+        $sql = "INSERT INTO contact (name, email, user_type, subject, message) VALUES ('$name', '$email', '$user_type', '$subject', '$message')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $_SESSION['message'] = "Message sent successfully";
@@ -439,3 +444,99 @@ if (isset($_POST['contact'])) {
         }
     }
 }
+
+// checkout
+if (isset($_POST['checkout'])) {
+    // get post form data
+    $uid = $_SESSION['user_id'];
+    $cart = mysqli_real_escape_string($conn, $_POST['cart']);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $city = mysqli_real_escape_string($conn, $_POST['city']);
+    $state = mysqli_real_escape_string($conn, $_POST['state']);
+    $zip = mysqli_real_escape_string($conn, $_POST['zip']);
+    // $country = mysqli_real_escape_string($conn, $_POST['country']);
+    // $payment_method = mysqli_real_escape_string($conn, $_POST['payment_method']);
+    // $card_name = mysqli_real_escape_string($conn, $_POST['card_name']);
+    // $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
+    // $card_cvv = mysqli_real_escape_string($conn, $_POST['card_cvv']);
+    // $card_expiry = mysqli_real_escape_string($conn, $_POST['card_expiry']);
+    $total = mysqli_real_escape_string($conn, $_POST['total']);
+    // verify input
+    $errors = [];
+    // store submitted data in $b_data array
+    $b_data = [
+        'name' => $name,
+        'email' => $email,
+        'phone' => $phone,
+        'address' => $address,
+        'city' => $city,
+        'state' => $state,
+        'zip' => $zip,
+        'total' => $total
+    ];
+    if (empty($name)) {
+        $errors['name'] = "Name is required";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email is required";
+    }
+    if (empty($phone)) {
+        $errors['phone'] = "Phone is required";
+    }
+    if (empty($address)) {
+        $errors['address'] = "Address is required";
+    }
+    if (empty($city)) {
+        $errors['city'] = "City is required";
+    }
+    if (empty($state)) {
+        $errors['state'] = "State is required";
+    }
+    if (empty($zip)) {
+        $errors['zip'] = "Zip is required";
+    }
+
+    if (empty($total)) {
+        $errors['total'] = "Total is required";
+    }
+    // if there are errors redirect to checkout page
+    if (count($errors) > 0) {
+        // redirect to checkout page with errors and submitted data
+        $errors = json_encode($errors);
+        $b_data = json_encode($b_data);
+        header("Location: checkout.php?cart=$cart&errors=$errors&b_data=$b_data");
+        exit();
+    } else {
+        // get product ids from cart
+        $cart = json_decode($cart);
+        // loop through cart and save order in the database
+        foreach ($cart as $key => $value) {
+            $pid = $value['id'];
+            $qty = $value['quantity'];
+            // save order in the database
+            $sql = "INSERT INTO orders (user_id, product_id, quantity, total) VALUES ('$uid', '$pid', '$qty', '$total')";
+            $result = mysqli_query($conn, $sql);
+            // if result is true save cart in the database
+            if ($result) {
+                $sql1 = "INSERT INTO cart (user_id, name, email, phone, address, city, state, zip) VALUES ('$uid', '$name', '$email', '$phone', '$address', '$city', '$state', '$zip')";
+                $result1 = mysqli_query($conn, $sql1);
+                if ($result1) {
+                    $_SESSION['message'] = "Order placed successfully";
+                    // redirect to home page
+                    header("Location: checkout.php");
+                    exit();
+                } else {
+                    echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+                }
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+        }
+    }
+}
+/* 
+http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22id%22%3A4%2C%22name%22%3A%22Wheat-+Mwamba+%22%2C%22price%22%3A52%2C%22amount%22%3A10%2C%22image%22%3A%22wheat+mwamba.jpg%22%2C%22quantity%22%3A2%2C%22total%22%3A104%7D%2C%7B%22id%22%3A5%2C%22name%22%3A%22Wheat-+Farasi%22%2C%22price%22%3A50%2C%22image%22%3A%22wheat+farasi.jpg%22%2C%22quantity%22%3A1%2C%22total%22%3A50%7D%5D
+*/
