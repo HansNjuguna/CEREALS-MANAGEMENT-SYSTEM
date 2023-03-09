@@ -153,11 +153,11 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
                 <?php
                 if (isset($_GET['cart'])) {
                     $cart = $_GET['cart'];
-                    echo "cart: $cart";
+                    // echo "cart: $cart";
                     $cartPass = [$cart];
                     // encode $cartPass to json
                     $cartPass = json_encode($cartPass);
-                    echo "cartPass: $cartPass";
+                    // echo "cartPass: $cartPass";
                     // loop through cart items
                     $cart = json_decode($cart);
                     foreach ($cart as $item) {
