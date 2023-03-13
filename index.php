@@ -83,6 +83,7 @@ if (!isset($_SESSION)) {
                 <?php
                 if (isset($_SESSION['username'])) { ?>
                     <li><a href="logout.php"> Logout</a></li>
+                    <li><a href="messages.php"> Messages</a></li>
                 <?php } else { ?>
                     <li><a href="login.php"> Login</a></li>
                 <?php }

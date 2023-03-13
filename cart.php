@@ -319,6 +319,10 @@ if (!isset($_SESSION['username'])) {
             $("#checkout").click(function() {
                 var cart = JSON.parse(localStorage.getItem("cart"));
                 var cart_items = JSON.stringify(cart);
+                // store cart in a cookie
+                document.cookie = "cart_items=" + cart_items;
+
+                // console.log(cart_items);
                 window.location.href = "checkout.php?cart_items=" + cart_items;
             });
 

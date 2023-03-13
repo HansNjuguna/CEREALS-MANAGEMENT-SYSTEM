@@ -20,12 +20,6 @@ if (isset($_GET['cart_items'])) {
     exit;
 }
 
-/* 
-http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22id%22%3A4%2C%22name%22%3A%22Wheat-+Mwamba+%22%2C%22price%22%3A52%2C%22amount%22%3A10%2C%22image%22%3A%22wheat+mwamba.jpg%22%2C%22quantity%22%3A2%2C%22total%22%3A104%7D%5D
-
-http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22id%22%3A4%2C%22name%22%3A%22Wheat-+Mwamba+%22%2C%22price%22%3A52%2C%22amount%22%3A10%2C%22image%22%3A%22wheat+mwamba.jpg%22%2C%22quantity%22%3A2%2C%22total%22%3A104%7D%2C%7B%22id%22%3A5%2C%22name%22%3A%22Wheat-+Farasi%22%2C%22price%22%3A50%2C%22image%22%3A%22wheat+farasi.jpg%22%2C%22quantity%22%3A1%2C%22total%22%3A50%7D%5D
-
-*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +28,40 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- icon -->
+    <link rel="icon" href="./assets/images/ceals_icon_2.jpg" type="image/png" sizes="16x16">
+    <!-- jqury modal css -->
+    <link rel="stylesheet" href="resources/burt/css/jquery.modal.min.css">
+    <!-- burt.css -->
+    <!-- <link rel="stylesheet" href="resources/burt/css/burt.css"> -->
+    <!-- jquery -->
+    <script src="resources/burt/js/jquery.js"></script>
+    <!-- jquery modal -->
+    <script src="resources/burt/js/jquery.modal.min.js"></script>
+    <!-- sweetalert -->
+    <script src="resources/burt/js/sweetalert.min.js"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="resources/burt/fontawesome-free-5.15.4-web/css/all.min.css">
+    <!-- waitme loader css -->
+    <link rel="stylesheet" href="resources/burt/Animations-waitMe/waitMe.css">
+    <!-- waitMe js loader -->
+    <script src="resources/burt/Animations-waitMe/waitMe.js"></script>
+    <!-- choosen custom select css -->
+    <link rel="stylesheet" href="resources/burt/chosen_v1.8.7_2/docsupport/style.css">
+    <link rel="stylesheet" href="resources/burt/chosen_v1.8.7_2/chosen.css">
+    <!-- choosen custom select js -->
+    <script src="resources/burt/chosen_v1.8.7_2/chosen.jquery.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- initalize choosen -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.chosen-select').chosen();
+        });
+    </script>
+
+    <title>Checkout</title>
+
     <style>
         * {
             padding: 0;
@@ -139,10 +166,33 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
         .success {
             color: green;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <!-- navigation bar -->
+    <section class="navigation_bar">
+        <nav>
+            <ul class="nav">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="login.php">Login/Register</a></li>
+                <li><a href="admin_login.php">Admin</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="services.php">Services</a></li>
+                <!-- cart -->
+                <li><a href="cart.php" id="cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
+            </ul>
+        </nav>
+
+    </section>
+
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -152,14 +202,25 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
             <div class="col-md-4">
                 <?php
                 if (isset($_GET['cart'])) {
-                    $cart = $_GET['cart'];
+                    // get cart from cart_items cookie
+                    if (isset($_COOKIE['cart_items'])) {
+                        $cart = $_COOKIE['cart_items'];
+                    } else {
+                        $cart = $_GET['cart'];
+                    }
                     // echo "cart: $cart";
+                    echo "<span class='hidden' id='origin-cart'>cart: $cart</span>";
                     $cartPass = [$cart];
                     // encode $cartPass to json
                     $cartPass = json_encode($cartPass);
                     // echo "cartPass: $cartPass";
                     // loop through cart items
                     $cart = json_decode($cart);
+                    // prety print cart
+                    /* echo "<pre>";
+                    print_r($cart);
+                    echo "</pre>"; */
+                    $_SESSION['cart'] = $cart;
                     foreach ($cart as $item) {
                         // display item in card
                         echo '<div class="card">
@@ -256,15 +317,19 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
                                     foreach ($cart as $item) {
                                         $total += $item->total;
                                     }
-
+                                    $init_total = $total;
+                                    $shipping = 100;
+                                    $total += $shipping;
                                     ?>
                                     <h5>Checkout</h5>
-                                    <p>Subtotal: 104</p>
-                                    <p>Shipping: 0</p>
-                                    <p>Total: <?php echo $total; ?></p>
+                                    <p>Subtotal: <?php echo $init_total; ?> Ksh</p>
+                                    <p>Shipping: <?php echo $shipping; ?> Ksh</p>
+                                    <p>Total: <?php echo $total; ?> Ksh</p>
                                     <input type="hidden" name="total" value="<?php echo $total; ?>">
-                                    <input type="hidden" name="cart" value="<?php echo $cartPass; ?>">
-                                    <button type="submit" name="checkout">Checkout</button>
+                                    <input type="hidden" name="cart" value="<?php print_r($cartPass); ?>">
+                                    <input type="hidden" name="checkout">
+                                    <button type="submit" name="checkout" class="checkout">Checkout</button>
+                                    <div class="waitme"></div>
                                 </div>
                             </div>
                         </form>
@@ -282,6 +347,61 @@ http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22i
             </div>
         </div>
     </div>
+
+    <!-- <div class="btn btn-primary" id="waitme">Waitme</div> -->
+    <script>
+        $(".checkout").click(function() {
+            event.preventDefault();
+            // add width and height
+            $('.waitme').css({
+                'width': '100px',
+                'height': '100px'
+            });
+            $('.waitme').waitMe({
+                effect: 'bounce',
+                text: 'Please wait...',
+                bg: 'rgba(255,255,255,0.7)',
+                color: '#000',
+                maxSize: '',
+                waitTime: -1,
+                textPos: 'vertical',
+                fontSize: '',
+                source: '',
+                onClose: function() {}
+            });
+            // get form data
+            var form = $("form").serialize();
+            console.log(form);
+            // submit form through ajax
+            $.ajax({
+                url: "reg_exe.php",
+                method: "POST",
+                data: form,
+                success: function(data) {
+                    // console.log(data);
+                    // remove waitme
+                    $('.waitme').waitMe('hide');
+                    // id data is success swal success
+                    if (data == "success") {
+                        swal({
+                            title: "Success",
+                            text: "Order placed successfully",
+                            icon: "success",
+                            button: "Ok",
+                        })
+                    } else {
+                        // else swal error and echo data
+                        swal({
+                            title: "Error",
+                            text: data,
+                            icon: "error",
+                            button: "Ok",
+                        })
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

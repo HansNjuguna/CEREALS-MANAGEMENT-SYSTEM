@@ -3,8 +3,12 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+// if session is not set this will redirect to login page
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

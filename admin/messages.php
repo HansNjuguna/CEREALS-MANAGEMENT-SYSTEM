@@ -287,7 +287,7 @@ if (!isset($_SESSION['username'])) {
                         <ul>
                             <?php
                             include '../dbh.php';
-                            $sql = "SELECT * FROM contact";
+                            $sql = "SELECT * FROM messages";
                             $result = mysqli_query($conn, $sql);
                             $tot = mysqli_num_rows($result);
                             if ($tot > 0) {
@@ -299,9 +299,9 @@ if (!isset($_SESSION['username'])) {
                                     $result2 = mysqli_query($conn, $sql1);
                                     $tot2 = mysqli_num_rows($result2);
                                     if ($tot2 > 0) {
-                                        echo '<li><a href="#" class="pmessage" id="' . $row['id'] . '">' . $row['name'] . '{' . $row['user_type'] . '}</a></li>';
+                                        echo '<li><a href="#" class="pmessage" id="' . $row['id'] . '">' . $row['name'] . '(' . $row['user_type'] . ')</a></li>';
                                     } else {
-                                        echo '<li><a href="#" class="active pmessage" id="' . $row['id'] . '">' . $row['name'] . '{' . $row['user_type'] . '}</a></li>';
+                                        echo '<li><a href="#" class="active pmessage" id="' . $row['id'] . '">' . $row['name'] . '(' . $row['user_type'] . ')</a></li>';
                                     }
                                     $tot--;
                                 }

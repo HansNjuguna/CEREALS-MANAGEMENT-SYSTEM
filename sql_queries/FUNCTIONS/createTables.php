@@ -27,14 +27,16 @@ $sql1 = "CREATE TABLE IF NOT EXISTS product (
     image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-// create contact table
-$sql2 = "CREATE TABLE IF NOT EXISTS contact (
+// create messages table
+$sql2 = "CREATE TABLE IF NOT EXISTS messages (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    uid INT(11) NOT NULL,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     user_type VARCHAR(50) NOT NULL,
     subject VARCHAR(255) NOT NULL,
     message VARCHAR(255) NOT NULL,
+    attachments VARCHAR(255) NOT NULL,
     status TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
@@ -52,6 +54,9 @@ $sql4 = "CREATE TABLE IF NOT EXISTS orders (
     product_id INT(11) NOT NULL,
     quantity INT(11) NOT NULL,
     total FLOAT NOT NULL,
+    deliverly_date DATE NOT NULL,
+    delivery_status TINYINT(1) NOT NULL DEFAULT 0,
+    payment_status TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 // create cart table
@@ -91,7 +96,7 @@ $statements[] =  $sql4; */
 // print_r($statements);
 // $statements[] = $sql;
 // $statements[] = $sql1;
-// $statements[] = $sql2;
+$statements[] = $sql2;
 // $statements[] = $sql3;
 $statements[] = $sql4;
 $statements[] = $sql5;

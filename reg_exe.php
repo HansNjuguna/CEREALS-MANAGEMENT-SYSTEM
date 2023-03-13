@@ -505,17 +505,24 @@ if (isset($_POST['checkout'])) {
     // if there are errors redirect to checkout page
     if (count($errors) > 0) {
         // redirect to checkout page with errors and submitted data
-        $errors = json_encode($errors);
-        $b_data = json_encode($b_data);
-        header("Location: checkout.php?cart=$cart&errors=$errors&b_data=$b_data");
-        exit();
+        // $errors = json_encode($errors);
+        // $b_data = json_encode($b_data);
+        // loop trough errors and display them
+        foreach ($errors as $key => $value) {
+            echo $value;
+        }
+        /* header("Location: checkout.php?cart=$cart&errors=$errors&b_data=$b_data");
+        exit(); */
     } else {
         // get product ids from cart
-        $cart = json_decode($cart);
+        $cart = $_SESSION['cart'];
+        /* echo "<pre> ";
+        print_r($cart);
+        echo "</pre>"; */
         // loop through cart and save order in the database
         foreach ($cart as $key => $value) {
-            $pid = $value['id'];
-            $qty = $value['quantity'];
+            $pid = $value->id;
+            $qty = $value->quantity;
             // save order in the database
             $sql = "INSERT INTO orders (user_id, product_id, quantity, total) VALUES ('$uid', '$pid', '$qty', '$total')";
             $result = mysqli_query($conn, $sql);
@@ -526,8 +533,7 @@ if (isset($_POST['checkout'])) {
                 if ($result1) {
                     $_SESSION['message'] = "Order placed successfully";
                     // redirect to home page
-                    header("Location: checkout.php");
-                    exit();
+
                 } else {
                     echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
                 }
@@ -535,8 +541,81 @@ if (isset($_POST['checkout'])) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
         }
+        echo "success";
     }
 }
-/* 
-http://localhost/work/CEREALS%20MANAGEMENT%20SYSTEM/checkout.php?cart=%5B%7B%22id%22%3A4%2C%22name%22%3A%22Wheat-+Mwamba+%22%2C%22price%22%3A52%2C%22amount%22%3A10%2C%22image%22%3A%22wheat+mwamba.jpg%22%2C%22quantity%22%3A2%2C%22total%22%3A104%7D%2C%7B%22id%22%3A5%2C%22name%22%3A%22Wheat-+Farasi%22%2C%22price%22%3A50%2C%22image%22%3A%22wheat+farasi.jpg%22%2C%22quantity%22%3A1%2C%22total%22%3A50%7D%5D
-*/
+
+if (isset($_POST['msg-submit'])) {
+    $uid = $_SESSION['user_id'];
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+    $errors = [];
+    if (empty($message)) {
+        $errors['message'] = "Message is required";
+    }
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
+        header("Location: messages.php");
+    } else {
+        // check if a file was submitted
+        if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+            print_r($_FILES['file']['name']);
+            // get file details
+            $file = $_FILES['file'];
+            // file properties
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $file_size = $file['size'];
+            $file_error = $file['error'];
+            // work out the file extension
+            $file_ext = explode('.', $file_name);
+            $file_ext = strtolower(end($file_ext));
+            // allowed file extensions
+            $allowed = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'];
+            // check if file extension is allowed
+            if (in_array($file_ext, $allowed)) {
+                // check for any errors
+                if ($file_error === 0) {
+                    // check file size
+                    if ($file_size <= 2097152) {
+                        // create unique file name
+                        $file_name_new = uniqid('', true) . '.' . $file_ext;
+                        // file destination
+                        $file_destination = 'assets/images/attachments/' . $file_name_new;
+                        // upload file
+                        if (move_uploaded_file($file_tmp, $file_destination)) {
+                            // save message in the database
+                            $sql = "INSERT INTO messages (uid, message, attachments) VALUES ('$uid', '$message', '$file_destination')";
+                            $result = mysqli_query($conn, $sql);
+                            if ($result) {
+                                $_SESSION['message'] = "Message sent successfully";
+                                // redirect to home page
+                                header("Location: messages.php");
+                                exit();
+                            } else {
+                                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                            }
+                        }
+                    } else {
+                        echo "File size is too big";
+                    }
+                } else {
+                    echo "There was an error uploading your file";
+                }
+            } else {
+                echo "File type is not allowed";
+            }
+        } else {
+            // save message in the database
+            $sql = "INSERT INTO messages (uid, message) VALUES ('$uid', '$message')";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                $_SESSION['message'] = "Message sent successfully";
+                // redirect to home page
+                header("Location: messages.php");
+                exit();
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+        }
+    }
+}

@@ -271,6 +271,8 @@ if (!isset($_SESSION['username'])) {
                 // cart.push(item);
                 localStorage.setItem('cart', JSON.stringify(cart));
                 cartItems();
+                // console log cart
+                console.log(cart);
             }
             // function to display cart items number
             function cartItems() {
