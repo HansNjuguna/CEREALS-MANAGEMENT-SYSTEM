@@ -130,6 +130,11 @@ if (!isset($_SESSION['username'])) {
             $result1 = mysqli_query($conn, $sql1);
             $users = mysqli_num_rows($result1);
             // echo $users;
+            // select orders
+            $sql2 = "SELECT * FROM orders";
+            $result2 = mysqli_query($conn, $sql2);
+            $orders = mysqli_num_rows($result2);
+            // echo $orders;
             ?>
             <h1>Dashboard</h1>
             <div class="content">
@@ -140,7 +145,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- bought products -->
                 <div class="card">
                     <h2>Bought Products</h2>
-                    <p>0</p>
+                    <p><?php echo $orders; ?></p>
                 </div>
                 <!-- users -->
                 <div class="card">
