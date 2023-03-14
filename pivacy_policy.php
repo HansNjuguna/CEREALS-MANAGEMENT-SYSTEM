@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals strtolower</title>
+    <title>Cereals Order System</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -19,7 +19,7 @@
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
-            <h1>Cereals Delmivery system</h1>
+            <h1>Cereals Order System</h1>
 
             <div class="serch_button">
             <form>

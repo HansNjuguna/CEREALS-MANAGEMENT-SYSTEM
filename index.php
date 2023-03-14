@@ -22,7 +22,7 @@ if (!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals </title>
+    <title>Cereals Order System</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -33,18 +33,9 @@ if (!isset($_SESSION)) {
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
-        <h1>Cereals Order system</h1>
+        <h1>Cereals Order System</h1>
         <br>
-        <!-- social media -->
-        <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>
-            <a href=""><i class="fa fa-instagram"></i></a>
-            <a href=""><i class="fa fa-facebook-official"></i></a>
-            <a href=""><i class="fa fa-youtube-play"></i></a>
-            <a href=""><i class="fab fa-whatsapp"></i></a>
-            <a href=""><i class="fa fa-envelope"></i></a>
-            <a href=""><i class="fa fa-phone"></i></a>
-            <br>
-        </div>
+        
 
         <form class="serch_button" style="float: right;">
 
@@ -79,7 +70,7 @@ if (!isset($_SESSION)) {
                 <!-- <li><a href="login.php">Login/Register</a></li> -->
                 <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="products.php">Products</a></li>
-                <li><a href="services.php">Services</a></li>
+                
                 <?php
                 if (isset($_SESSION['username'])) { ?>
                     <li><a href="logout.php"> Logout</a></li>
@@ -191,7 +182,7 @@ if (!isset($_SESSION)) {
 
     <section>
         <div class="footer">
-            <p>Copyright@2023 - online cereals system. All rights reserved</p>
+            <p>Copyright@2023 -Cereals Order System. All rights reserved</p>
             <br>
             <button id="scrollTopBtn">Scroll to Top</button>
 

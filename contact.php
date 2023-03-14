@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals strtolower</title>
+    <title>Cereals Order System</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -27,15 +27,16 @@ if (!isset($_SESSION)) {
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
-            <h1>Cereals Delmivery system</h1>
+            <h1>Cereals Order System</h1>
 
-            <div class="serch_button">
-                <form>
+            <div>
+                <form class="serch_button" style="float: right;">
                     <input type="text" placeholder="Search...">
                     <button type="submit">Go</button>
 
                 </form>
-            </div>
+</div>
+            
 
     </header>
     <style>
@@ -160,8 +161,8 @@ if (!isset($_SESSION)) {
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="login.php">Login/Register</a></li>
                 <li><a href="admin_login.php">Admin</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
-                <li><a href="services.php">Services</a></li>
+                
+                
 
         </nav>
 

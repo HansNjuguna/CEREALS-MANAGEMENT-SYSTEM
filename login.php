@@ -91,11 +91,11 @@
             <ul class="nav">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Login</a></li>
+                
                 <li><a href="sign_up.php">Register</a></li>
                 <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="products.php">Products</a></li>
-                <li><a href="services.php">Services</a></li>
+                
 
             </ul>
         </nav>
