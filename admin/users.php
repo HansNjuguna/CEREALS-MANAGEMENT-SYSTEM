@@ -171,12 +171,12 @@ if (!isset($_SESSION['username'])) {
             ?>
         </div>
         <div class="right">
-            <h1>Products</h1>
+            <h1>Users</h1>
             <div class="content">
                 <!-- add product btn -->
                 <button class="btn"><a href="add_product.php">Add a product</a> </button>
                 <div class="content">
-                    <h2>Products listing</h2>
+                    <h2>Users listing</h2>
                     <!-- list products in table format -->
                     <?php
                     // if $_SESSION['success'] is set

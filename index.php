@@ -89,7 +89,7 @@ if (!isset($_SESSION)) {
         <!-- banner_section -->
         <div class="banner_section">
             <h1>Make a purchase, and we will deliver it to your home.</h1>
-            <p>Online Cereals store is a website that allows you to buy cereals online and have them delivered to your
+            <p>Cereals Order System is a website that allows you to buy cereals online and have them delivered to your
                 home.</p>
 
         </div>

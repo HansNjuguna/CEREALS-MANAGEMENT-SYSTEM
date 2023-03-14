@@ -77,7 +77,7 @@
 </head>
 
 <body>
-    <h1><b>CMS</b> Sign Up</h1>
+    <h1> Sign Up</h1>
     <form action="reg_exe.php" method="POST">
         <?php
         if (isset($_GET['errors'])) {

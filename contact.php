@@ -26,10 +26,10 @@ if (!isset($_SESSION)) {
         <!-- logo -->
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
-            <!-- h1 -->
+          <!--h1-->
             <h1>Cereals Order System</h1>
-
-            <div>
+         <div>
+            
                 <form class="serch_button" style="float: right;">
                     <input type="text" placeholder="Search...">
                     <button type="submit">Go</button>
