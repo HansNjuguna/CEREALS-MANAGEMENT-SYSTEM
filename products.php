@@ -31,17 +31,25 @@ if (!isset($_SESSION)) {
         <!-- logo -->
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
-            <!-- h1 -->
-            <h1>Cereals Order system</h1>
-
-            <div class="serch_button">
-                <form>
-                    <input type="text" placeholder="Search...">
-                    <button type="submit">Go</button>
-
-                </form>
-            </div>
         </div>
+        <!-- h1 -->
+        <h1>Cereals Order system</h1>
+        <br>
+        <!-- social media -->
+        <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-facebook-official"></i></a>
+            <a href=""><i class="fa fa-youtube-play"></i></a>
+            <a href=""><i class="fab fa-whatsapp"></i></a>
+            <a href=""><i class="fa fa-envelope"></i></a>
+            <a href=""><i class="fa fa-phone"></i></a>
+            <br>
+        </div>
+
+        <form class="serch_button" style="float: right;">
+            <input type="text" placeholder="Search...">
+            <button type="submit">Go</button>
+        </form>
     </header>
 
 </head>

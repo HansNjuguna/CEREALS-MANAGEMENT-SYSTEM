@@ -4,10 +4,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 // if session is not set this will redirect to login page
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit;
 }
+// var_dump($_SESSION);
 
 ?>
 
@@ -20,145 +21,7 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background: #34495e;
-            box-sizing: border-box;
-        }
 
-        .container {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .left {
-            width: 25vw;
-            height: 100vh;
-            background: #2c3e50;
-            color: #fff;
-        }
-
-        .right {
-            width: 75vw;
-            height: 100vh;
-            background: #ecf0f1;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        a:hover {
-            color: #3498db;
-        }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            padding: 20px;
-
-        }
-
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f4f4f4;
-            border-radius: 0px 0px 10px 10px;
-        }
-
-        .right h1 {
-            color: #000 !important;
-        }
-
-        .card {
-            width: 200px;
-            height: 150px;
-            background: #fff;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .card h2 {
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-        }
-
-        .card p {
-            margin: 0;
-            padding: 20px 0px;
-            font-size: 20px;
-        }
-
-        button {
-            background: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button a:hover {
-            color: #fff;
-        }
-
-        table {
-            width: 70vw;
-            border-collapse: collapse;
-            overflow-x: hidden;
-        }
-
-        tr,
-        td,
-        th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #3498db;
-            color: white;
-            max-width: 25%;
-        }
-
-        td a {
-            color: #2c3e50;
-            display: flex;
-            flex-direction: column;
-        }
-    </style> -->
     <style>
         .content {
             display: flex;
@@ -184,18 +47,29 @@ if (!isset($_SESSION['username'])) {
             height: 100%;
             min-height: 80vh;
             max-height: 80vh;
-            overflow-y: scroll;
+
             background: #fff;
             padding: 20px 10px;
             overflow-x: hidden;
         }
 
         .mheader ul li a {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
             color: #000;
+            cursor: pointer;
         }
 
         .mheader ul li a:hover {
             color: #3498db;
+        }
+
+        .mheader img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
         }
 
         .mbody h3 {
@@ -207,15 +81,16 @@ if (!isset($_SESSION['username'])) {
         }
 
         .mbody form {
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 35%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
         }
 
-        .mbody input[type="text"] {
+        .mbody-x textarea,
+        .mbody-x .attach {
             width: 90%;
             height: 40px;
             border: 1px solid #ddd;
@@ -227,7 +102,7 @@ if (!isset($_SESSION['username'])) {
 
         }
 
-        .mbody input[type="submit"] {
+        .mbody-x input[type="submit"] {
             width: 100%;
             height: 40px;
             border: none;
@@ -239,6 +114,11 @@ if (!isset($_SESSION['username'])) {
             cursor: pointer;
             position: absolute;
             bottom: 0;
+        }
+
+        .mbody .message {
+            height: 65%;
+            overflow-y: scroll;
         }
 
         .active {
@@ -266,6 +146,91 @@ if (!isset($_SESSION['username'])) {
             margin-left: 25%;
             /* background: #dbdbdb; */
         }
+
+        .messages {
+            width: 70%;
+            height: 100%;
+            overflow-y: scroll;
+            margin: auto;
+            min-height: 100vh;
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .messages-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .message {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .other,
+        .self {
+            width: 70%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .other a,
+        .self a {
+            color: #3498db;
+        }
+
+        .other {
+            background-color: #f1f0f0;
+            border-radius: 10px 10px 0 10px;
+            align-self: flex-start;
+        }
+
+        .self {
+            background-color: #e2f3f5;
+            border-radius: 10px 10px 10px 0;
+            align-self: flex-end;
+        }
+
+        .messages-container form {
+            width: 100%;
+            /* height: 100px; */
+            display: flex;
+            flex-direction: column;
+            /* justify-content: space-between; */
+            /* position: absolute;
+            bottom: 0;*/
+        }
+
+        .messages-container form textarea {
+            width: 90%;
+            padding: 10px;
+        }
+
+        .messages-container form button {
+            padding: 10px;
+            background-color: #e2f3f5;
+            margin: 10px 0;
+        }
+
+        .messages-container form button:hover {
+            background-color: #f1f0f0;
+        }
+
+        .attach {
+            width: 100%;
+            height: 40px;
+            margin: 10px 0;
+        }
     </style>
     <script src="../assets/js/jquery.min.js"></script>
 </head>
@@ -287,23 +252,24 @@ if (!isset($_SESSION['username'])) {
                         <ul>
                             <?php
                             include '../dbh.php';
-                            $sql = "SELECT * FROM messages";
+                            $sql = "SELECT DISTINCT uid FROM messages";
                             $result = mysqli_query($conn, $sql);
                             $tot = mysqli_num_rows($result);
                             if ($tot > 0) {
-                                // check if a message has replies or not
-                                while ($tot > 0) {
-                                    $row = mysqli_fetch_assoc($result);
-                                    $id = $row['id'];
-                                    $sql1 = "SELECT * FROM replies WHERE message_id = '$id'";
-                                    $result2 = mysqli_query($conn, $sql1);
-                                    $tot2 = mysqli_num_rows($result2);
-                                    if ($tot2 > 0) {
-                                        echo '<li><a href="#" class="pmessage" id="' . $row['id'] . '">' . $row['name'] . '(' . $row['user_type'] . ')</a></li>';
-                                    } else {
-                                        echo '<li><a href="#" class="active pmessage" id="' . $row['id'] . '">' . $row['name'] . '(' . $row['user_type'] . ')</a></li>';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    // get user id
+                                    $id = $row['uid'];
+                                    // echo $id;
+                                    // get user name from user table
+                                    $sql2 = "SELECT * FROM user WHERE id = '$id'";
+                                    $result2 = mysqli_query($conn, $sql2);
+                                    $row2 = mysqli_fetch_assoc($result2);
+                                    $name = $row2['username'];
+                                    $image = $row2['image'];
+                                    if ($image == "") {
+                                        $image = "default_profile.jpg";
                                     }
-                                    $tot--;
+                                    echo "<li><a  class='msg-fetch' id='" . $row['uid'] . "'><img src='../assets/images/profiles/" . $image . "' alt='" . $name . "'> " . $name . "</a></li>";
                                 }
                             }
                             ?>
@@ -313,21 +279,33 @@ if (!isset($_SESSION['username'])) {
                         </ul>
                     </div>
                     <div class="mbody">
-                        <h3>Message Subject</h3>
-                        <h4>Message sender email</h4>
-                        <div class="message" id="message">
-                            <p class="init">
+                        <!-- <?php echo $_SESSION['user_id']; ?> -->
+                        <h3>Choose a conversation to view</h3>
+                        <!-- <h3>Message Subject</h3>
+                        <h4>Message sender email</h4> -->
+                        <div class="message" id="message-data">
+                            <!--<p class="init">
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolorem consectetur iure commodi beatae tempora quae atque! Magnam aut quam laborum suscipit illum nemo neque, dolore autem, repudiandae omnis corrupti?
                             </p>
                             <p class="nxt">
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolorem consectetur iure commodi beatae tempora quae atque! Magnam aut quam laborum suscipit illum nemo neque, dolore autem, repudiandae omnis corrupti?
-                            </p>
+                            </p>-->
                         </div>
 
                         <!-- send message input -->
-                        <form action="" method="post">
+                        <!-- <form action="../reg_exe.php" method="post">
                             <input type="text" name="message" id="message" placeholder="send message">
-                            <input type="submit" name="send" value="send">
+                            <input type="submit" name="msg-submit" class="admin-send" value="send">
+                        </form> -->
+                        <form action="../reg_exe.php" method="post" enctype="multipart/form-data">
+                            <textarea name="message" id="message" cols="30" rows="4" placeholder="Type amessage"></textarea>
+                            <input type="hidden" name="id" id="sender-id" value="">
+                            <!-- attach files -->
+                            <div class="attach">
+                                <input type="file" name="file" id="file">
+                                <label for="file">Attach file</label>
+                            </div>
+                            <button type="submit" name="msg-submit">Send</button>
                         </form>
                     </div>
                 </div>
@@ -352,24 +330,25 @@ if (!isset($_SESSION['username'])) {
                 });
             }
             return false;
-
-            // pmessage on click load message
-            $('.pmessage').click(function() {
-                // get id of message
-                var id = $(this).attr('id');
-                console.log(id);
-                // pass id to ajax request
-                $.ajax({
-                    url: "load-message.php",
-                    method: "POST",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        // load message in message div
-                        $('#message').html(data);
-                    }
-                });
+        });
+        // pmessage on click load message
+        $('.msg-fetch').click(function() {
+            // get id of message
+            var id = $(this).attr('id');
+            // console.log(id);
+            // set id in hidden input
+            $('#sender-id').val(id);
+            // pass id to ajax request
+            $.ajax({
+                url: "load-message.php",
+                method: "POST",
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    // load message in message div
+                    $('#message-data').html(data);
+                }
             });
         });
     </script>

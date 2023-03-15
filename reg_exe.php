@@ -251,7 +251,7 @@ if (isset($_POST['admin-login'])) {
             if (password_verify($password, $hashed_password)) {
                 echo "hello world";
                 session_start();
-                $_SESSION['admin_id'] = $row['id'];
+                $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 // redirect to home page
                 header("Location: admin/dashboard.php");
@@ -547,6 +547,17 @@ if (isset($_POST['checkout'])) {
 
 if (isset($_POST['msg-submit'])) {
     $uid = $_SESSION['user_id'];
+    // check if user is admin
+    $sql_s = "SELECT * FROM user WHERE id = '$uid'";
+    $result_s = mysqli_query($conn, $sql_s);
+    $row_s = mysqli_fetch_assoc($result_s);
+    $role = $row_s['isadmin'];
+    if ($role == 1) {
+        $sender = 101;
+        $uid = mysqli_real_escape_string($conn, $_POST['id']);
+    } else {
+        $sender = $uid;
+    }
     $message = mysqli_real_escape_string($conn, $_POST['message']);
     $errors = [];
     if (empty($message)) {
@@ -554,7 +565,11 @@ if (isset($_POST['msg-submit'])) {
     }
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
-        header("Location: messages.php");
+        if ($sender === 101) {
+            header("Location: admin/messages.php");
+        } else {
+            header("Location: messages.php");
+        }
     } else {
         // check if a file was submitted
         if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
@@ -584,12 +599,16 @@ if (isset($_POST['msg-submit'])) {
                         // upload file
                         if (move_uploaded_file($file_tmp, $file_destination)) {
                             // save message in the database
-                            $sql = "INSERT INTO messages (uid, message, attachments) VALUES ('$uid', '$message', '$file_destination')";
+                            $sql = "INSERT INTO messages (uid, to_id, message, attachments) VALUES ('$uid', '$sender','$message', '$file_destination')";
                             $result = mysqli_query($conn, $sql);
                             if ($result) {
                                 $_SESSION['message'] = "Message sent successfully";
                                 // redirect to home page
-                                header("Location: messages.php");
+                                if ($sender === 101) {
+                                    header("Location: admin/messages.php");
+                                } else {
+                                    header("Location: messages.php");
+                                }
                                 exit();
                             } else {
                                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -606,16 +625,28 @@ if (isset($_POST['msg-submit'])) {
             }
         } else {
             // save message in the database
-            $sql = "INSERT INTO messages (uid, message) VALUES ('$uid', '$message')";
+            $sql = "INSERT INTO messages (uid, to_id, message) VALUES ('$uid', '$sender', '$message')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 $_SESSION['message'] = "Message sent successfully";
                 // redirect to home page
-                header("Location: messages.php");
+                if ($sender === 101) {
+                    header("Location: admin/messages.php");
+                } else {
+                    header("Location: messages.php");
+                }
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
         }
+    }
+}
+// admin-send
+if (isset($_POST['admin-send'])) {
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+    $errors = [];
+    if (empty($message)) {
+        $errors['message'] = "Message is required";
     }
 }
