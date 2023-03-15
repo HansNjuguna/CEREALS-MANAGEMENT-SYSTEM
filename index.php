@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
     <header>
         <!-- logo -->
         <div class="logo">
-            <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
+            <img src="./assets/images/cereals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
         <h1>Cereals Order System</h1>
