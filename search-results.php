@@ -29,9 +29,10 @@
     <style>
         .container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto;
         }
 
         .container form {
@@ -100,27 +101,48 @@
     <!-- login page -->
     <section>
         <div class="container">
-            <form action="reg_exe.php" method="POST">
-                <h1>Login</h1>
-                <?php
-                if (isset($_GET['errors'])) {
-                    $errors = json_decode($_GET['errors'], true);
-                    foreach ($errors as $key => $value) {
-                        echo "<div class='danger'>$value</div>";
+            <!-- search-results.php -->
+            <?php
+            include 'dbh.php';
+            if (isset($_GET['search'])) {
+                $search = $_GET['search'];
+                $search = preg_replace("#[^0-9a-z]#i", "", $search);
+                $query = mysqli_query($conn, "SELECT * FROM product WHERE p_name LIKE '%$search%' OR p_description LIKE '%$search%'");
+                $count = mysqli_num_rows($query);
+                if ($count == 0) {
+                    echo '<div class="search-header">
+                            <h1>Search Results for "' . $search . '"</h1>
+                        </div>
+                        <div class="imagelisting">
+                            <p>No results found</p>
+                        </div>';
+                } else {
+                    echo '<div class="search-header">
+                            <h1>Search Results for "' . $search . '"</h1>
+                        </div>
+                        <div class="imagelisting">
+                    ';
+                    while ($row = mysqli_fetch_assoc($query)) {
+                        echo "<div class='image'>
+                        <img src='assets/images/products/" . $row['image'] . "' alt='" . $row['p_name'] . "'>
+                        <p>" . $row['p_name'] . "</p>
+                        <a href='view-products.php?id=" . $row['p_id'] . "'>View product</a>
+                        </div>
+                    ";
                     }
+                    echo '</div>';
                 }
-                ?>
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="username...">
+            }
+            ?>
+            <!-- <div class="search-header">
+                <h1>Search Results for products</h1>
+            </div>
+            <div class="imagelisting">
+                <div class="image"> <img src="./assets/images/grain_0.jpg" alt="Image 2">
+                    <p>grapheme_extract</p>
+                    <a href="#">View product</a>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="password...">
-                </div>
-                <button type="submit" name="login">Login</button>
-            </form>
-        </div>
+            </div> -->
     </section>
     <section>
 

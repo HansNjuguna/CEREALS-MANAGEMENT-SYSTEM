@@ -11,7 +11,6 @@ if (!isset($_SESSION)) {
  */
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,10 +26,12 @@ if (!isset($_SESSION)) {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="resources/burt/fontawesome-free-5.15.4-web/css/all.min.css">
     <header>
         <!-- logo -->
         <div class="logo">
-            <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
+            <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
         <h1>Cereals Order system</h1>
@@ -46,9 +47,9 @@ if (!isset($_SESSION)) {
             <br>
         </div>
 
-        <form class="serch_button" style="float: right;">
-            <input type="text" placeholder="Search...">
-            <button type="submit">Go</button>
+        <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
+            <input type="text" name="search" placeholder="Search...">
+            <button type="submit">search</button>
         </form>
     </header>
     <script src="/assets/jquery-3.6.3.min.js"></script>
@@ -153,11 +154,11 @@ if (!isset($_SESSION)) {
         <div class="upperfooter">
             <div class="main">
                 <ul>
-                    <li><a href="about_us.php">> ABOUT US</a></li>
-                    <li><a href="FAQS.php">> FAQS</a></li>
-                    <li><a href="pivacy_policy.php">> Privacy policy</a></li>
-                    <li><a href="terms_of-use.php">> Terms of use</a></li>
-                    <li><a href="admin_login.php">> Admin Login</a></li>
+                    <li><a href="about_us.php"><i class="fas fa-info"></i> About US</a></li>
+                    <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li>
+                    <li><a href="pivacy_policy.php"><i class="fas fa-user-shield"></i> Privacy policy</a></li>
+                    <li><a href="terms_of-use.php"><i class="fas fa-handshake"></i> Terms of use</a></li>
+                    <li><a href="admin_login.php"><i class="fas fa-sign-in-alt"></i> Admin Sign in</a></li>
                 </ul>
             </div>
             <div class="sidebar">
@@ -174,11 +175,12 @@ if (!isset($_SESSION)) {
                 </form>
 
             </div>
-    </SEction>
+        </div>
+    </section>
 
     <section>
         <div class="footer">
-            <p>Copyright@2023 - online cereals system. All rights reserved</p>
+            <p>Copyright@2023 - online cereals system. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
             <br>
             <button id="scrollTopBtn">Scroll to Top</button>
 

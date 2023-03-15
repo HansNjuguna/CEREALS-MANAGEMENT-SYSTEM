@@ -35,17 +35,13 @@ if (!isset($_SESSION['username'])) {
     <header>
         <!-- logo -->
         <div class="logo">
-            <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
+            <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
             <h1>Cereals Order system</h1>
-
-            <div class="serch_button">
-                <form>
-                    <input type="text" placeholder="Search...">
-                    <button type="submit">Go</button>
-
-                </form>
-            </div>
+            <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
+                <input type="text" name="search" placeholder="Search...">
+                <button type="submit">search</button>
+            </form>
         </div>
     </header>
     <style>
