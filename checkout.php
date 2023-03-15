@@ -388,7 +388,10 @@ if (isset($_GET['cart_items'])) {
                             text: "Order placed successfully",
                             icon: "success",
                             button: "Ok",
-                        })
+                        }).then(function() {
+                            // redirect to homepage
+                            window.location.href = "index.php";
+                        });
                     } else {
                         // else swal error and echo data
                         swal({

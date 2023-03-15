@@ -44,6 +44,22 @@ h1 {
   padding: 10px;
   transition: all 0.3s ease;
 }
+.logo,
+.logo form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}
+.logo h1 {
+  margin-left: 20px;
+}
+.logo form {
+  position: absolute;
+  right: 0;
+  padding: 30px;
+}
 
 /* hoover */
 .nav a:hover {
@@ -228,13 +244,21 @@ h1 {
   cursor: pointer; /* change cursor to pointer when hovering over the button */
   font-size: 18px; /* set font size of the button text */
 }
-
+.more_about {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
 .more_about p {
   color: #3c2a21;
   font-size: 16px;
   padding: 10px;
   text-align: justify;
   text-justify: inter-word;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  font-weight: 700;
 }
 #scroll-top-btn {
   position: fixed;
@@ -248,6 +272,12 @@ h1 {
 }
 .social_media {
   font-size: 30px;
+}
+.burt {
+  font-size: 10px;
+  color: #1a120b;
+  text-align: center;
+  padding: 10px;
 }
 #scrollTopBtn {
   position: fixed;
@@ -288,4 +318,15 @@ h1 {
   color: green;
   font-size: 12px;
   font-weight: bold;
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
 }

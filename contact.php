@@ -31,6 +31,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['username'])) {
     <header>
         <!-- logo -->
         <div class="logo">
+<<<<<<< HEAD
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
           <!--h1-->
             <h1>Cereals Order System</h1>
@@ -44,6 +45,17 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['username'])) {
 </div>
             
 
+=======
+            <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
+            <!-- h1 -->
+            <h1>Cereals Delmivery system</h1>
+
+            <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
+                <input type="text" name="search" placeholder="Search...">
+                <button type="submit">search</button>
+            </form>
+        </div>
+>>>>>>> be5a92cbaa03aab3fa95a153a2e4c26f761fce34
     </header>
     <style>
         /* Add some basic styling */
