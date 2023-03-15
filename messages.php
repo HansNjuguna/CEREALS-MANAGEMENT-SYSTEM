@@ -21,7 +21,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online cereals </title>
+    <title>Cereals Order System </title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -159,7 +159,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
                 <!-- <li><a href="login.php">Login/Register</a></li> -->
                 <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="products.php">Products</a></li>
-                <li><a href="services.php">Services</a></li>
+                
                 <?php
                 if (isset($_SESSION['username'])) { ?>
                     <li><a href="logout.php"> Logout</a></li>
