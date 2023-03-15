@@ -101,7 +101,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- <li><a href="login.php">Login/Register</a></li> -->
                 <li><a href="admin_login.php">Admin</a></li>
                 <li><a href="products.php">Products</a></li>
-                <li><a href="services.php">Services</a></li>
+                
                 <?php
                 if (isset($_SESSION['username'])) { ?>
                     <li><a href="logout.php"> Logout</a></li>
