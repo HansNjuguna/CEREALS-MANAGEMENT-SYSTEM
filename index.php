@@ -47,23 +47,9 @@ if (!isset($_SESSION)) {
         </div>
 
         <form class="serch_button" style="float: right;">
-
             <input type="text" placeholder="Search...">
             <button type="submit">Go</button>
-
         </form>
-
-        <div>
-            <button class="toggle-button"></button>
-            <!--  <span><?php
-                        echo "Hello " . $_SESSION['username'];
-                        ?></span> -->
-            <div class="toggle-content">
-                <a href="#" id="logout">Logout</a>
-                <a href="profile.php" id="profile">Profile</a>
-            </div>
-        </div>
-
     </header>
     <script src="/assets/jquery-3.6.3.min.js"></script>
 

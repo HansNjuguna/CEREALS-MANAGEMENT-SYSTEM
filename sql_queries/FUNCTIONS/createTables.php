@@ -31,6 +31,7 @@ $sql1 = "CREATE TABLE IF NOT EXISTS product (
 $sql2 = "CREATE TABLE IF NOT EXISTS messages (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     uid INT(11) NOT NULL,
+    to_id INT(11) NOT NULL,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     user_type VARCHAR(50) NOT NULL,

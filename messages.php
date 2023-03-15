@@ -4,11 +4,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 // if session is not set this will redirect to login page
-/* if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
+if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit;
 }
- */
+
 ?>
 
 <!DOCTYPE html>
@@ -54,11 +54,13 @@ if (!isset($_SESSION)) {
 
         <div>
             <button class="toggle-button"></button>
-            <!--  <span><?php
-                        echo "Hello " . $_SESSION['username'];
-                        ?></span> -->
+            <span>
+                <?php
+                echo "Hello " . $_SESSION['username'];
+                ?>
+            </span>
             <div class="toggle-content">
-                <a href="#" id="logout">Logout</a>
+                <a href="logout.php" id="logout">Logout</a>
                 <a href="profile.php" id="profile">Profile</a>
             </div>
         </div>
@@ -186,22 +188,31 @@ if (!isset($_SESSION)) {
                 $tot = mysqli_num_rows($result);
                 if ($tot > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        if ($row['uid'] == $uid) {
+                        $attachement = $row['attachments'];
+                        $message = $row['message'];
+                        $to_id = $row['to_id'];
+                        if ($to_id == $uid) {
                             echo '<div class="self">
-                            <p>' . $row['message'] . '</p>
-                            <a href="#">attached files</a>
-                        </div>';
-                        } else {
+                            <p>' . $message . '</p>
+                            ';
+                            if ($attachement != '') {
+                                echo '<a href="' . $attachement . '" target="_blank">' . $attachement . '</a>';
+                            }
+                            echo '</div>';
+                        } elseif ($to_id == 101) {
                             echo '<div class="other">
-                            <p>' . $row['message'] . '</p>
-                            <a href="#">attached files</a>
-                        </div>';
+                            <p>' . $message .
+                                '</p>
+                            ';
+                            if ($attachement != '') {
+                                echo '<a href="' . $attachement . '" target="_blank">' . $attachement . '</a>';
+                            }
+                            echo '</div>';
                         }
                     }
                 } else {
                     echo '<div class="other">
                     <p>There are no messages</p>
-                    <a href="#">attached files</a>
                 </div>';
                 }
                 ?>
