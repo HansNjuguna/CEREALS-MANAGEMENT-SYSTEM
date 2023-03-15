@@ -32,7 +32,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
             <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
-        <h1>Cereals Order system</h1>
+        <h1>Cereals Order System</h1>
         <br>
         <!-- social media -->
         <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>

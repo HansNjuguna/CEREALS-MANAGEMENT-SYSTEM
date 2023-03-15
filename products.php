@@ -21,7 +21,7 @@ if (!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cereals Order system</title>
+    <title>Cereals Order System</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -33,7 +33,7 @@ if (!isset($_SESSION)) {
             <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
-        <h1>Cereals Order system</h1>
+        <h1>Cereals Order System</h1>
         <br>
         <!-- social media -->
         <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>
