@@ -204,7 +204,7 @@ if (!isset($_SESSION['username'])) {
 
             <section>
                 <div class="footer">
-                    <p>Copyright@2023 - online cereals system. All rights reserved</p>
+                    <p>Copyright@2023 - Cereals Order System. All rights reserved</p>
                     <a href="pivacy_policy.html">privacy policy</a>
                     <a href="terms_of-use.html">Terms of use</a>
                     <i class="fabv fa-twitter"></i>
