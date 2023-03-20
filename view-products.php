@@ -143,9 +143,9 @@ if (!isset($_SESSION['username'])) {
                                 <img src="assets/images/products/' . $row['image'] . '" alt="' . $row['p_name'] . '">
                             </div>
                             <div class="par">
-                                <p>' . $row['p_name'] . '</p>
+                                <p class="one">' . $row['p_name'] . '</p>
                                 <p>' . $row['p_description'] . '</p>
-                                <p>available quantity: ' . $row['P_amount'] . ' kg</p>
+                                <p>Available quantity: ' . $row['P_amount'] . ' kg</p>
                                 <p>Price/kg: ' . $row['price'] . 'Ksh</p>
                                 <button class="add-cart">Add to cart</button>
                             </div>

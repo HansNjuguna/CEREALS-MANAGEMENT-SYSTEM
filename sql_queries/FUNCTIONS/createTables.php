@@ -93,7 +93,7 @@ $sql4 = "CREATE TABLE IF NOT EXISTS student45 (
 $statements[] = $sql1;
 $statements[] =  $sql2;
 $statements[] =  $sql3;
-$statements[] =  $sql4; */
+$statements[] =  $sql4;*/ 
 // print_r($statements);
 // $statements[] = $sql;
 // $statements[] = $sql1;

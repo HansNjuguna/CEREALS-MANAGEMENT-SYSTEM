@@ -46,7 +46,7 @@ if (!isset($_SESSION['username'])) {
                                 <th>Order ID</th>
                                 <th>Customer</th>
                                 <th>Product</th>
-                                <th>Quantity</th>
+                                <th>Quantity</th> 
                                 <th>Price</th>
                                 <th>Order Date</th>
                                 <th>Delivery Date</th>
