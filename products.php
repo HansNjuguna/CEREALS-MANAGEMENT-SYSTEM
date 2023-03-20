@@ -89,7 +89,7 @@ if (!isset($_SESSION)) {
             $queryResults = mysqli_num_rows($result);
             if ($queryResults > 0) {
                 while ($row =  mysqli_fetch_assoc($result)) {
-                    echo "<div class='image'>
+                    echo "<div class='image view-item-product'>
                         <img src='assets/images/products/" . $row['image'] . "' alt='" . $row['p_name'] . "'>
                         <p>" . $row['p_name'] . "</p>
                         <a href='view-products.php?id=" . $row['p_id'] . "'>View product</a>
@@ -120,53 +120,44 @@ if (!isset($_SESSION)) {
 
         </div>
         <br>
-        <section>
-            <section>
+    </section>
+    <section>
 
-                <div class="upperfooter">
-                    <div class="main">
-                        <ul>
-                            <li><a href="about_us.php">> ABOUT US</a></li>
-                            <li><a href="FAQS.php">> FAQS</a></li>
-                            <li><a href="pivacy_policy.php">> Privacy policy</a></li>
-                            <li><a href="terms_of-use.php">> Terms of use</a></li>
-                            <li><a href="admin_login.php">> Admin Login</a></li>
-                            <?php
-                            if (isset($_SESSION['username'])) { ?>
-                                <li><a href="logout.php">> Logout</a></li>
-                            <?php } else { ?>
-                                <li><a href="login.php">> Login</a></li>
-                            <?php }
-                            ?>
-                        </ul>
-                    </div>
-                    <div class="sidebar">
-                        <form>
-                            <label for="email">SUBSCRIBE NEWSLETTER</label>
-                            <input type="email" id="email" name="email" placeholder="example@email.com">
-                            <br>
-                            <button type="submit">Subscribe</button>
-                            <p>
-                                if you dont have an account
-                                <br><a href="user_sign _up.php">Sign up!</a>
-                                here now
-                            </p>
-                        </form>
+        <div class="upperfooter">
+            <div class="main">
+                <ul>
+                    <li><a href="about_us.php"><i class="fas fa-info"></i> About US</a></li>
+                    <!-- <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li> -->
+                    <li><a href="pivacy_policy.php"><i class="fas fa-user-shield"></i> Privacy policy</a></li>
+                    <li><a href="terms_of-use.php"><i class="fas fa-handshake"></i> Terms of use</a></li>
+                    <li><a href="admin_login.php"><i class="fas fa-sign-in-alt"></i> Admin Sign in</a></li>
+                </ul>
+            </div>
+            <div class="sidebar">
+                <form>
+                    <label for="email">SUBSCRIBE NEWSLETTER</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com">
+                    <br>
+                    <button type="submit">Subscribe</button>
+                    <p>
+                        if you dont have an account
+                        <br><a href="user_sign _up.php">Sign up!</a>
+                        here now
+                    </p>
+                </form>
 
-                    </div>
-            </SEction>
+            </div>
+        </div>
+    </section>
 
-            <section>
-                <div class="footer">
-                    <p>Copyright@2023 - online cereals system. All rights reserved</p>
-                    <a href="pivacy_policy.html">privacy policy</a>
-                    <a href="terms_of-use.html">Terms of use</a>
-                    <i class="fabv fa-twitter"></i>
-                    <i class="fabv fa-whatsapp"></i>
-                    <i class="fabv fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                </div>
-            </section>
+    <section>
+        <div class="footer">
+            <p>Copyright@2023 - online cereals system. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
+            <br>
+            <button id="scrollTopBtn">Scroll to Top</button>
+
+        </div>
+    </section>
 </body>
 
 </html>

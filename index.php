@@ -101,35 +101,6 @@ if (!isset($_SESSION)) {
     </section>
 
     <br>
-    <!-- <section>
-        <div class="imagelisting">
-
-            <div class="image"> <img src="./assets/images/grain_0.jpg" alt="Image 2">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_1.jpg" alt="Image 3">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_3.jpg" alt="Image 4">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_4.jpg" alt="Image 5">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_5.jpg" alt="Image 6">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_7.jpg" alt="Image 7">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-        </div>
-    </section> -->
 
     <section>
 
@@ -137,16 +108,7 @@ if (!isset($_SESSION)) {
 
         <div class="fixed">
             <h2> OUR SATISFIED CUSTOMERS</h2>
-            <!-- <div class="slider">
-  <ul>
-  <li><img src="./assets/images/comment-author-1.jpg" alt=""></li>
-  <li>  <img src="/assets/images/comment-author-2.jpg" alt=""></li>
-  <li>  <img src="/asets/images/comment-author-3.jpg" alt=""></li>
-  <li><img src="/assets/images/comment-author-1.jpg" alt=""></li>  
-</ul>
- </div>
 
-      </div> -->
     </section>
 
     <section>
@@ -155,7 +117,7 @@ if (!isset($_SESSION)) {
             <div class="main">
                 <ul>
                     <li><a href="about_us.php"><i class="fas fa-info"></i> About US</a></li>
-                    <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li>
+                    <!-- <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li> -->
                     <li><a href="pivacy_policy.php"><i class="fas fa-user-shield"></i> Privacy policy</a></li>
                     <li><a href="terms_of-use.php"><i class="fas fa-handshake"></i> Terms of use</a></li>
                     <li><a href="admin_login.php"><i class="fas fa-sign-in-alt"></i> Admin Sign in</a></li>

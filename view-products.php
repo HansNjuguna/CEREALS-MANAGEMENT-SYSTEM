@@ -38,31 +38,56 @@ if (!isset($_SESSION['username'])) {
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
             <h1>Cereals Order system</h1>
-
-            <div class="serch_button">
-                <form>
-                    <input type="text" placeholder="Search...">
-                    <button type="submit">Go</button>
-
-                </form>
-            </div>
         </div>
+        <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
+            <input type="text" name="search" placeholder="Search...">
+            <button type="submit">search</button>
+        </form>
     </header>
     <style>
         .content {
             width: 75%;
-            margin: 0 auto;
+            margin: auto;
             font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: row;
         }
 
         .img {
-            width: 50%;
-            float: left;
+            width: 45%;
+            /* float: left; */
         }
 
         .par {
-            width: 50%;
-            float: right;
+            width: 45%;
+            /* float: right; */
+        }
+
+        .par-view-product {
+            padding: 10px;
+            margin: 10px auto;
+            border: 1px solid white;
+            border-radius: 5px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .par-view-product .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .par-view-product .decription {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .par-view-product .quantity,
+        .par-view-product .price {
+            font-size: 15px;
+            font-weight: bold;
+            /* color: #4CAF50; */
         }
 
         .content img {
@@ -142,11 +167,11 @@ if (!isset($_SESSION['username'])) {
                             <div class="img">
                                 <img src="assets/images/products/' . $row['image'] . '" alt="' . $row['p_name'] . '">
                             </div>
-                            <div class="par">
-                                <p>' . $row['p_name'] . '</p>
-                                <p>' . $row['p_description'] . '</p>
-                                <p>available quantity: ' . $row['P_amount'] . ' kg</p>
-                                <p>Price/kg: ' . $row['price'] . 'Ksh</p>
+                            <div class="par par-view-product">
+                                <p class="name">' . $row['p_name'] . '</p>
+                                <p class="decription">' . $row['p_description'] . '</p>
+                                <p class="quantity">available quantity: ' . $row['P_amount'] . ' kg</p>
+                                <p class="price">Price/kg: ' . $row['price'] . 'Ksh</p>
                                 <button class="add-cart">Add to cart</button>
                             </div>
                         </div>
