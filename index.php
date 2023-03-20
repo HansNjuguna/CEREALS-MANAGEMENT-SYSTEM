@@ -21,7 +21,7 @@ if (!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cereals Order System</title>
+    <title>Cereals Order Sytem </title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -31,12 +31,21 @@ if (!isset($_SESSION)) {
     <header>
         <!-- logo -->
         <div class="logo">
-            <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
+            <img src="assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
         </div>
         <!-- h1 -->
         <h1>Cereals Order System</h1>
         <br>
-        
+        <!-- social media -->
+        <div class="social_media"><a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-facebook-official"></i></a>
+            <a href=""><i class="fa fa-youtube-play"></i></a>
+            <a href=""><i class="fab fa-whatsapp"></i></a>
+            <a href=""><i class="fa fa-envelope"></i></a>
+            <a href=""><i class="fa fa-phone"></i></a>
+            <br>
+        </div>
 
         <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
             <input type="text" name="search" placeholder="Search...">
@@ -77,7 +86,7 @@ if (!isset($_SESSION)) {
         <!-- banner_section -->
         <div class="banner_section">
             <h1>Make a purchase, and we will deliver it to your home.</h1>
-            <p>Cereals Order System is a website that allows you to buy cereals online and have them delivered to your
+            <p>Online Cereals store is a website that allows you to buy cereals online and have them delivered to your
                 home.</p>
 
         </div>
@@ -92,35 +101,6 @@ if (!isset($_SESSION)) {
     </section>
 
     <br>
-    <!-- <section>
-        <div class="imagelisting">
-
-            <div class="image"> <img src="./assets/images/grain_0.jpg" alt="Image 2">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_1.jpg" alt="Image 3">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_3.jpg" alt="Image 4">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_4.jpg" alt="Image 5">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_5.jpg" alt="Image 6">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-            <div class="image"> <img src="./assets/images/grain_7.jpg" alt="Image 7">
-                <p>grapheme_extract</p>
-                <p>Ksh9.99/Kg</p>
-            </div>
-        </div>
-    </section> -->
 
     <section>
 
@@ -128,16 +108,7 @@ if (!isset($_SESSION)) {
 
         <div class="fixed">
             <h2> OUR SATISFIED CUSTOMERS</h2>
-            <!-- <div class="slider">
-  <ul>
-  <li><img src="./assets/images/comment-author-1.jpg" alt=""></li>
-  <li>  <img src="/assets/images/comment-author-2.jpg" alt=""></li>
-  <li>  <img src="/asets/images/comment-author-3.jpg" alt=""></li>
-  <li><img src="/assets/images/comment-author-1.jpg" alt=""></li>  
-</ul>
- </div>
 
-      </div> -->
     </section>
 
     <section>
@@ -146,7 +117,7 @@ if (!isset($_SESSION)) {
             <div class="main">
                 <ul>
                     <li><a href="about_us.php"><i class="fas fa-info"></i> About US</a></li>
-                    <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li>
+                    <!-- <li><a href="FAQS.php"><i class="fas fa-question"></i> FAQS</a></li> -->
                     <li><a href="pivacy_policy.php"><i class="fas fa-user-shield"></i> Privacy policy</a></li>
                     <li><a href="terms_of-use.php"><i class="fas fa-handshake"></i> Terms of use</a></li>
                     <li><a href="admin_login.php"><i class="fas fa-sign-in-alt"></i> Admin Sign in</a></li>
@@ -171,7 +142,7 @@ if (!isset($_SESSION)) {
 
     <section>
         <div class="footer">
-            <p>Copyright@2023 - online cereals system. All rights reserved</p>
+            <p>Copyright@2023 - online cereals system. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
             <br>
             <button id="scrollTopBtn">Scroll to Top</button>
 

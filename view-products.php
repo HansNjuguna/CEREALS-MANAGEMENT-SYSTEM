@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cereals Order System</title>
+    <title>Cereals Order system</title>
     <!-- link rel="stylesheet" href="style.css">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -37,32 +37,57 @@ if (!isset($_SESSION['username'])) {
         <div class="logo">
             <img src="./assets/images/ceals_icon_2.jpg" alt="logo" width="90px " height="90px">
             <!-- h1 -->
-            <h1>Cereals Order System</h1>
-
-            <div class="serch_button">
-                <form>
-                    <input type="text" placeholder="Search...">
-                    <button type="submit">Go</button>
-
-                </form>
-            </div>
+            <h1>Cereals Order system</h1>
         </div>
+        <form action="search-results.php" method="GET" class="serch_button" style="float: right;">
+            <input type="text" name="search" placeholder="Search...">
+            <button type="submit">search</button>
+        </form>
     </header>
     <style>
         .content {
             width: 75%;
-            margin: 0 auto;
+            margin: auto;
             font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: row;
         }
 
         .img {
-            width: 50%;
-            float: left;
+            width: 45%;
+            /* float: left; */
         }
 
         .par {
-            width: 50%;
-            float: right;
+            width: 45%;
+            /* float: right; */
+        }
+
+        .par-view-product {
+            padding: 10px;
+            margin: 10px auto;
+            border: 1px solid white;
+            border-radius: 5px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .par-view-product .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .par-view-product .decription {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .par-view-product .quantity,
+        .par-view-product .price {
+            font-size: 15px;
+            font-weight: bold;
+            /* color: #4CAF50; */
         }
 
         .content img {
@@ -142,11 +167,11 @@ if (!isset($_SESSION['username'])) {
                             <div class="img">
                                 <img src="assets/images/products/' . $row['image'] . '" alt="' . $row['p_name'] . '">
                             </div>
-                            <div class="par">
-                                <p class="one">' . $row['p_name'] . '</p>
-                                <p>' . $row['p_description'] . '</p>
-                                <p>Available quantity: ' . $row['P_amount'] . ' kg</p>
-                                <p>Price/kg: ' . $row['price'] . 'Ksh</p>
+                            <div class="par par-view-product">
+                                <p class="name">' . $row['p_name'] . '</p>
+                                <p class="decription">' . $row['p_description'] . '</p>
+                                <p class="quantity">available quantity: ' . $row['P_amount'] . ' kg</p>
+                                <p class="price">Price/kg: ' . $row['price'] . 'Ksh</p>
                                 <button class="add-cart">Add to cart</button>
                             </div>
                         </div>
@@ -204,7 +229,7 @@ if (!isset($_SESSION['username'])) {
 
             <section>
                 <div class="footer">
-                    <p>Copyright@2023 - Cereals Order System. All rights reserved</p>
+                    <p>Copyright@2023 -Cereals Order Sytem. All rights reserved</p>
                     <a href="pivacy_policy.html">privacy policy</a>
                     <a href="terms_of-use.html">Terms of use</a>
                     <i class="fabv fa-twitter"></i>
