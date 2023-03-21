@@ -42,10 +42,10 @@
             <ul class="nav">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Login/Register</a></li>
+                <li><a href="login.php">Login</a></li>
                 <li><a href="admin_login.php">Admin</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
-                <li><a href="services.php">Services</a></li>
+                
+                
 
             </ul>
         </nav>
@@ -112,7 +112,7 @@
 
     <section>
         <div class="footer">
-            <p>Copyright@2023 - online cereals system. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
+            <p>Copyright@2023 - Cereals Order System. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
             <br>
             <button id="scrollTopBtn">Scroll to Top</button>
 
