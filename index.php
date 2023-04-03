@@ -142,7 +142,7 @@ if (!isset($_SESSION)) {
 
     <section>
         <div class="footer">
-            <p>Copyright@2023 - online cereals system. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
+            <p>Copyright@2023 -Cereals Order System. All rights reserved <span class="burt">by Openisoft, Axzyte g</span></p>
             <br>
             <button id="scrollTopBtn">Scroll to Top</button>
 
